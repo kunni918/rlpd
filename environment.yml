@@ -186,4 +186,6 @@ dependencies:
       - wandb==0.18.7
       - zipp==3.21.0
       - mujoco-py==1.50.1.68  # make sure install mujoco-py at last, since it builds wheel depending on other packages
+variables:
+  XLA_PYTHON_CLIENT_PREALLOCATE: 'false'
 prefix: /home/kunni/miniconda3/envs/rlpd
