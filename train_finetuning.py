@@ -175,8 +175,10 @@ def main(_):
 
         if done:
             observation, done = env.reset(), False
+            decode = {"r": "return", "l": "length", "t": "time"}
             for k, v in info["episode"].items():
-                decode = {"r": "return", "l": "length", "t": "time"}
+                if k == "r":
+                    v = (v - env.ref_min_score) / (env.ref_max_score - env.ref_min_score)
                 wandb.log({f"training/{decode[k]}": v}, step=i + FLAGS.pretrain_steps)
 
         if i >= FLAGS.start_training:

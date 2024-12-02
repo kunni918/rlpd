@@ -18,4 +18,7 @@ def evaluate(
         while not done:
             action = agent.eval_actions(observation)
             observation, _, done, _ = env.step(action)
-    return {"return": np.mean(env.return_queue), "length": np.mean(env.length_queue)}
+
+    mean_return = np.mean(env.return_queue)
+    normalized_mean_return = (mean_return - env.ref_min_score) / (env.ref_max_score - env.ref_min_score)
+    return {"return": normalized_mean_return * 100. , "length": np.mean(env.length_queue)}
